@@ -1,0 +1,557 @@
+   1              		.cpu arm7tdmi
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 4
+   9              		.eabi_attribute 34, 0
+  10              		.eabi_attribute 18, 4
+  11              		.file	"armVIC.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.align	2
+  16              		.global	disableIRQ
+  17              		.arch armv4t
+  18              		.syntax unified
+  19              		.arm
+  20              		.fpu softvfp
+  22              	disableIRQ:
+  23              	.LFB2:
+  24              		.file 1 "../firmware/armVIC.c"
+   1:../firmware/armVIC.c **** /******************************************************************************
+   2:../firmware/armVIC.c ****  * This module provides the interface routines for setting up and
+   3:../firmware/armVIC.c ****  * controlling the various interrupt modes present on the ARM processor.
+   4:../firmware/armVIC.c ****  * Copyright 2004, R O SoftWare
+   5:../firmware/armVIC.c ****  * No guarantees, warrantees, or promises, implied or otherwise.
+   6:../firmware/armVIC.c ****  * May be used for hobby or commercial purposes provided copyright
+   7:../firmware/armVIC.c ****  * notice remains intact.
+   8:../firmware/armVIC.c ****  *****************************************************************************/
+   9:../firmware/armVIC.c **** #include "armVIC.h"
+  10:../firmware/armVIC.c **** 
+  11:../firmware/armVIC.c **** #define IRQ_MASK 0x00000080
+  12:../firmware/armVIC.c **** #define FIQ_MASK 0x00000040
+  13:../firmware/armVIC.c **** #define INT_MASK (IRQ_MASK | FIQ_MASK)
+  14:../firmware/armVIC.c **** 
+  15:../firmware/armVIC.c **** static inline unsigned __get_cpsr(void)
+  16:../firmware/armVIC.c **** {
+  17:../firmware/armVIC.c ****   unsigned long retval;
+  18:../firmware/armVIC.c ****   asm volatile (" mrs  %0, cpsr" : "=r" (retval) : /* no inputs */  );
+  19:../firmware/armVIC.c ****   return retval;
+  20:../firmware/armVIC.c **** }
+  21:../firmware/armVIC.c **** 
+  22:../firmware/armVIC.c **** static inline void __set_cpsr(unsigned val)
+  23:../firmware/armVIC.c **** {
+  24:../firmware/armVIC.c ****   asm volatile (" msr  cpsr, %0" : /* no outputs */ : "r" (val)  );
+  25:../firmware/armVIC.c **** }
+  26:../firmware/armVIC.c **** 
+  27:../firmware/armVIC.c **** unsigned disableIRQ(void)
+  28:../firmware/armVIC.c **** {
+  25              		.loc 1 28 1 view -0
+  26              		.cfi_startproc
+  27              		@ Function supports interworking.
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              		@ link register save eliminated.
+  29:../firmware/armVIC.c ****   unsigned _cpsr;
+  31              		.loc 1 29 3 view .LVU1
+  30:../firmware/armVIC.c **** 
+  31:../firmware/armVIC.c ****   _cpsr = __get_cpsr();
+  32              		.loc 1 31 3 view .LVU2
+  33              	.LBB26:
+  34              	.LBI26:
+  15:../firmware/armVIC.c **** {
+  35              		.loc 1 15 24 view .LVU3
+  36              	.LBB27:
+  17:../firmware/armVIC.c ****   asm volatile (" mrs  %0, cpsr" : "=r" (retval) : /* no inputs */  );
+  37              		.loc 1 17 3 view .LVU4
+  18:../firmware/armVIC.c ****   return retval;
+  38              		.loc 1 18 3 view .LVU5
+  39              		.syntax divided
+  40              	@ 18 "../firmware/armVIC.c" 1
+  41 0000 00000FE1 		 mrs  r0, cpsr
+  42              	@ 0 "" 2
+  43              	.LVL0:
+  19:../firmware/armVIC.c **** }
+  44              		.loc 1 19 3 view .LVU6
+  19:../firmware/armVIC.c **** }
+  45              		.loc 1 19 3 is_stmt 0 view .LVU7
+  46              		.arm
+  47              		.syntax unified
+  48              	.LBE27:
+  49              	.LBE26:
+  32:../firmware/armVIC.c ****   __set_cpsr(_cpsr | IRQ_MASK);
+  50              		.loc 1 32 3 is_stmt 1 view .LVU8
+  51              	.LBB28:
+  52              	.LBI28:
+  22:../firmware/armVIC.c **** {
+  53              		.loc 1 22 20 view .LVU9
+  54              	.LBB29:
+  24:../firmware/armVIC.c **** }
+  55              		.loc 1 24 3 view .LVU10
+  56              	.LBE29:
+  57              	.LBE28:
+  58              		.loc 1 32 3 is_stmt 0 view .LVU11
+  59 0004 803080E3 		orr	r3, r0, #128
+  60              	.LVL1:
+  61              	.LBB31:
+  62              	.LBB30:
+  24:../firmware/armVIC.c **** }
+  63              		.loc 1 24 3 view .LVU12
+  64              		.syntax divided
+  65              	@ 24 "../firmware/armVIC.c" 1
+  66 0008 03F029E1 		 msr  cpsr, r3
+  67              	@ 0 "" 2
+  68              	.LVL2:
+  24:../firmware/armVIC.c **** }
+  69              		.loc 1 24 3 view .LVU13
+  70              		.arm
+  71              		.syntax unified
+  72              	.LBE30:
+  73              	.LBE31:
+  33:../firmware/armVIC.c ****   return _cpsr;
+  74              		.loc 1 33 3 is_stmt 1 view .LVU14
+  34:../firmware/armVIC.c **** }
+  75              		.loc 1 34 1 is_stmt 0 view .LVU15
+  76 000c 1EFF2FE1 		bx	lr
+  77              		.cfi_endproc
+  78              	.LFE2:
+  80              		.align	2
+  81              		.global	restoreIRQ
+  82              		.syntax unified
+  83              		.arm
+  84              		.fpu softvfp
+  86              	restoreIRQ:
+  87              	.LVL3:
+  88              	.LFB3:
+  35:../firmware/armVIC.c **** 
+  36:../firmware/armVIC.c **** unsigned restoreIRQ(unsigned oldCPSR)
+  37:../firmware/armVIC.c **** {
+  89              		.loc 1 37 1 is_stmt 1 view -0
+  90              		.cfi_startproc
+  91              		@ Function supports interworking.
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 0, uses_anonymous_args = 0
+  94              		@ link register save eliminated.
+  38:../firmware/armVIC.c ****   unsigned _cpsr;
+  95              		.loc 1 38 3 view .LVU17
+  39:../firmware/armVIC.c **** 
+  40:../firmware/armVIC.c ****   _cpsr = __get_cpsr();
+  96              		.loc 1 40 3 view .LVU18
+  97              	.LBB32:
+  98              	.LBI32:
+  15:../firmware/armVIC.c **** {
+  99              		.loc 1 15 24 view .LVU19
+ 100              	.LBB33:
+  17:../firmware/armVIC.c ****   asm volatile (" mrs  %0, cpsr" : "=r" (retval) : /* no inputs */  );
+ 101              		.loc 1 17 3 view .LVU20
+  18:../firmware/armVIC.c ****   return retval;
+ 102              		.loc 1 18 3 view .LVU21
+ 103              	.LBE33:
+ 104              	.LBE32:
+  37:../firmware/armVIC.c ****   unsigned _cpsr;
+ 105              		.loc 1 37 1 is_stmt 0 view .LVU22
+ 106 0010 0030A0E1 		mov	r3, r0
+ 107              	.LBB35:
+ 108              	.LBB34:
+  18:../firmware/armVIC.c ****   return retval;
+ 109              		.loc 1 18 3 view .LVU23
+ 110              		.syntax divided
+ 111              	@ 18 "../firmware/armVIC.c" 1
+ 112 0014 00000FE1 		 mrs  r0, cpsr
+ 113              	@ 0 "" 2
+ 114              	.LVL4:
+  19:../firmware/armVIC.c **** }
+ 115              		.loc 1 19 3 is_stmt 1 view .LVU24
+  19:../firmware/armVIC.c **** }
+ 116              		.loc 1 19 3 is_stmt 0 view .LVU25
+ 117              		.arm
+ 118              		.syntax unified
+ 119              	.LBE34:
+ 120              	.LBE35:
+  41:../firmware/armVIC.c ****   __set_cpsr((_cpsr & ~IRQ_MASK) | (oldCPSR & IRQ_MASK));
+ 121              		.loc 1 41 3 is_stmt 1 view .LVU26
+ 122              	.LBB36:
+ 123              	.LBI36:
+  22:../firmware/armVIC.c **** {
+ 124              		.loc 1 22 20 view .LVU27
+ 125              	.LBB37:
+  24:../firmware/armVIC.c **** }
+ 126              		.loc 1 24 3 view .LVU28
+ 127              	.LBE37:
+ 128              	.LBE36:
+ 129              		.loc 1 41 21 is_stmt 0 view .LVU29
+ 130 0018 8020C0E3 		bic	r2, r0, #128
+ 131              		.loc 1 41 45 view .LVU30
+ 132 001c 803003E2 		and	r3, r3, #128
+ 133              	.LVL5:
+ 134              		.loc 1 41 3 view .LVU31
+ 135 0020 033082E1 		orr	r3, r2, r3
+ 136              	.LVL6:
+ 137              	.LBB39:
+ 138              	.LBB38:
+  24:../firmware/armVIC.c **** }
+ 139              		.loc 1 24 3 view .LVU32
+ 140              		.syntax divided
+ 141              	@ 24 "../firmware/armVIC.c" 1
+ 142 0024 03F029E1 		 msr  cpsr, r3
+ 143              	@ 0 "" 2
+ 144              	.LVL7:
+  24:../firmware/armVIC.c **** }
+ 145              		.loc 1 24 3 view .LVU33
+ 146              		.arm
+ 147              		.syntax unified
+ 148              	.LBE38:
+ 149              	.LBE39:
+  42:../firmware/armVIC.c ****   return _cpsr;
+ 150              		.loc 1 42 3 is_stmt 1 view .LVU34
+  43:../firmware/armVIC.c **** }
+ 151              		.loc 1 43 1 is_stmt 0 view .LVU35
+ 152 0028 1EFF2FE1 		bx	lr
+ 153              		.cfi_endproc
+ 154              	.LFE3:
+ 156              		.align	2
+ 157              		.global	enableIRQ
+ 158              		.syntax unified
+ 159              		.arm
+ 160              		.fpu softvfp
+ 162              	enableIRQ:
+ 163              	.LFB4:
+  44:../firmware/armVIC.c **** 
+  45:../firmware/armVIC.c **** unsigned enableIRQ(void)
+  46:../firmware/armVIC.c **** {
+ 164              		.loc 1 46 1 is_stmt 1 view -0
+ 165              		.cfi_startproc
+ 166              		@ Function supports interworking.
+ 167              		@ args = 0, pretend = 0, frame = 0
+ 168              		@ frame_needed = 0, uses_anonymous_args = 0
+ 169              		@ link register save eliminated.
+  47:../firmware/armVIC.c ****   unsigned _cpsr;
+ 170              		.loc 1 47 3 view .LVU37
+  48:../firmware/armVIC.c **** 
+  49:../firmware/armVIC.c ****   _cpsr = __get_cpsr();
+ 171              		.loc 1 49 3 view .LVU38
+ 172              	.LBB40:
+ 173              	.LBI40:
+  15:../firmware/armVIC.c **** {
+ 174              		.loc 1 15 24 view .LVU39
+ 175              	.LBB41:
+  17:../firmware/armVIC.c ****   asm volatile (" mrs  %0, cpsr" : "=r" (retval) : /* no inputs */  );
+ 176              		.loc 1 17 3 view .LVU40
+  18:../firmware/armVIC.c ****   return retval;
+ 177              		.loc 1 18 3 view .LVU41
+ 178              		.syntax divided
+ 179              	@ 18 "../firmware/armVIC.c" 1
+ 180 002c 00000FE1 		 mrs  r0, cpsr
+ 181              	@ 0 "" 2
+ 182              	.LVL8:
+  19:../firmware/armVIC.c **** }
+ 183              		.loc 1 19 3 view .LVU42
+  19:../firmware/armVIC.c **** }
+ 184              		.loc 1 19 3 is_stmt 0 view .LVU43
+ 185              		.arm
+ 186              		.syntax unified
+ 187              	.LBE41:
+ 188              	.LBE40:
+  50:../firmware/armVIC.c ****   __set_cpsr(_cpsr & ~IRQ_MASK);
+ 189              		.loc 1 50 3 is_stmt 1 view .LVU44
+ 190              	.LBB42:
+ 191              	.LBI42:
+  22:../firmware/armVIC.c **** {
+ 192              		.loc 1 22 20 view .LVU45
+ 193              	.LBB43:
+  24:../firmware/armVIC.c **** }
+ 194              		.loc 1 24 3 view .LVU46
+ 195              	.LBE43:
+ 196              	.LBE42:
+ 197              		.loc 1 50 3 is_stmt 0 view .LVU47
+ 198 0030 8030C0E3 		bic	r3, r0, #128
+ 199              	.LVL9:
+ 200              	.LBB45:
+ 201              	.LBB44:
+  24:../firmware/armVIC.c **** }
+ 202              		.loc 1 24 3 view .LVU48
+ 203              		.syntax divided
+ 204              	@ 24 "../firmware/armVIC.c" 1
+ 205 0034 03F029E1 		 msr  cpsr, r3
+ 206              	@ 0 "" 2
+ 207              	.LVL10:
+  24:../firmware/armVIC.c **** }
+ 208              		.loc 1 24 3 view .LVU49
+ 209              		.arm
+ 210              		.syntax unified
+ 211              	.LBE44:
+ 212              	.LBE45:
+  51:../firmware/armVIC.c ****   return _cpsr;
+ 213              		.loc 1 51 3 is_stmt 1 view .LVU50
+  52:../firmware/armVIC.c **** }
+ 214              		.loc 1 52 1 is_stmt 0 view .LVU51
+ 215 0038 1EFF2FE1 		bx	lr
+ 216              		.cfi_endproc
+ 217              	.LFE4:
+ 219              		.align	2
+ 220              		.global	disableFIQ
+ 221              		.syntax unified
+ 222              		.arm
+ 223              		.fpu softvfp
+ 225              	disableFIQ:
+ 226              	.LFB5:
+  53:../firmware/armVIC.c **** 
+  54:../firmware/armVIC.c **** unsigned disableFIQ(void)
+  55:../firmware/armVIC.c **** {
+ 227              		.loc 1 55 1 is_stmt 1 view -0
+ 228              		.cfi_startproc
+ 229              		@ Function supports interworking.
+ 230              		@ args = 0, pretend = 0, frame = 0
+ 231              		@ frame_needed = 0, uses_anonymous_args = 0
+ 232              		@ link register save eliminated.
+  56:../firmware/armVIC.c ****   unsigned _cpsr;
+ 233              		.loc 1 56 3 view .LVU53
+  57:../firmware/armVIC.c **** 
+  58:../firmware/armVIC.c ****   _cpsr = __get_cpsr();
+ 234              		.loc 1 58 3 view .LVU54
+ 235              	.LBB46:
+ 236              	.LBI46:
+  15:../firmware/armVIC.c **** {
+ 237              		.loc 1 15 24 view .LVU55
+ 238              	.LBB47:
+  17:../firmware/armVIC.c ****   asm volatile (" mrs  %0, cpsr" : "=r" (retval) : /* no inputs */  );
+ 239              		.loc 1 17 3 view .LVU56
+  18:../firmware/armVIC.c ****   return retval;
+ 240              		.loc 1 18 3 view .LVU57
+ 241              		.syntax divided
+ 242              	@ 18 "../firmware/armVIC.c" 1
+ 243 003c 00000FE1 		 mrs  r0, cpsr
+ 244              	@ 0 "" 2
+ 245              	.LVL11:
+  19:../firmware/armVIC.c **** }
+ 246              		.loc 1 19 3 view .LVU58
+  19:../firmware/armVIC.c **** }
+ 247              		.loc 1 19 3 is_stmt 0 view .LVU59
+ 248              		.arm
+ 249              		.syntax unified
+ 250              	.LBE47:
+ 251              	.LBE46:
+  59:../firmware/armVIC.c ****   __set_cpsr(_cpsr | FIQ_MASK);
+ 252              		.loc 1 59 3 is_stmt 1 view .LVU60
+ 253              	.LBB48:
+ 254              	.LBI48:
+  22:../firmware/armVIC.c **** {
+ 255              		.loc 1 22 20 view .LVU61
+ 256              	.LBB49:
+  24:../firmware/armVIC.c **** }
+ 257              		.loc 1 24 3 view .LVU62
+ 258              	.LBE49:
+ 259              	.LBE48:
+ 260              		.loc 1 59 3 is_stmt 0 view .LVU63
+ 261 0040 403080E3 		orr	r3, r0, #64
+ 262              	.LVL12:
+ 263              	.LBB51:
+ 264              	.LBB50:
+  24:../firmware/armVIC.c **** }
+ 265              		.loc 1 24 3 view .LVU64
+ 266              		.syntax divided
+ 267              	@ 24 "../firmware/armVIC.c" 1
+ 268 0044 03F029E1 		 msr  cpsr, r3
+ 269              	@ 0 "" 2
+ 270              	.LVL13:
+  24:../firmware/armVIC.c **** }
+ 271              		.loc 1 24 3 view .LVU65
+ 272              		.arm
+ 273              		.syntax unified
+ 274              	.LBE50:
+ 275              	.LBE51:
+  60:../firmware/armVIC.c ****   return _cpsr;
+ 276              		.loc 1 60 3 is_stmt 1 view .LVU66
+  61:../firmware/armVIC.c **** }
+ 277              		.loc 1 61 1 is_stmt 0 view .LVU67
+ 278 0048 1EFF2FE1 		bx	lr
+ 279              		.cfi_endproc
+ 280              	.LFE5:
+ 282              		.align	2
+ 283              		.global	restoreFIQ
+ 284              		.syntax unified
+ 285              		.arm
+ 286              		.fpu softvfp
+ 288              	restoreFIQ:
+ 289              	.LVL14:
+ 290              	.LFB6:
+  62:../firmware/armVIC.c **** 
+  63:../firmware/armVIC.c **** unsigned restoreFIQ(unsigned oldCPSR)
+  64:../firmware/armVIC.c **** {
+ 291              		.loc 1 64 1 is_stmt 1 view -0
+ 292              		.cfi_startproc
+ 293              		@ Function supports interworking.
+ 294              		@ args = 0, pretend = 0, frame = 0
+ 295              		@ frame_needed = 0, uses_anonymous_args = 0
+ 296              		@ link register save eliminated.
+  65:../firmware/armVIC.c ****   unsigned _cpsr;
+ 297              		.loc 1 65 3 view .LVU69
+  66:../firmware/armVIC.c **** 
+  67:../firmware/armVIC.c ****   _cpsr = __get_cpsr();
+ 298              		.loc 1 67 3 view .LVU70
+ 299              	.LBB52:
+ 300              	.LBI52:
+  15:../firmware/armVIC.c **** {
+ 301              		.loc 1 15 24 view .LVU71
+ 302              	.LBB53:
+  17:../firmware/armVIC.c ****   asm volatile (" mrs  %0, cpsr" : "=r" (retval) : /* no inputs */  );
+ 303              		.loc 1 17 3 view .LVU72
+  18:../firmware/armVIC.c ****   return retval;
+ 304              		.loc 1 18 3 view .LVU73
+ 305              	.LBE53:
+ 306              	.LBE52:
+  64:../firmware/armVIC.c ****   unsigned _cpsr;
+ 307              		.loc 1 64 1 is_stmt 0 view .LVU74
+ 308 004c 0030A0E1 		mov	r3, r0
+ 309              	.LBB55:
+ 310              	.LBB54:
+  18:../firmware/armVIC.c ****   return retval;
+ 311              		.loc 1 18 3 view .LVU75
+ 312              		.syntax divided
+ 313              	@ 18 "../firmware/armVIC.c" 1
+ 314 0050 00000FE1 		 mrs  r0, cpsr
+ 315              	@ 0 "" 2
+ 316              	.LVL15:
+  19:../firmware/armVIC.c **** }
+ 317              		.loc 1 19 3 is_stmt 1 view .LVU76
+  19:../firmware/armVIC.c **** }
+ 318              		.loc 1 19 3 is_stmt 0 view .LVU77
+ 319              		.arm
+ 320              		.syntax unified
+ 321              	.LBE54:
+ 322              	.LBE55:
+  68:../firmware/armVIC.c ****   __set_cpsr((_cpsr & ~FIQ_MASK) | (oldCPSR & FIQ_MASK));
+ 323              		.loc 1 68 3 is_stmt 1 view .LVU78
+ 324              	.LBB56:
+ 325              	.LBI56:
+  22:../firmware/armVIC.c **** {
+ 326              		.loc 1 22 20 view .LVU79
+ 327              	.LBB57:
+  24:../firmware/armVIC.c **** }
+ 328              		.loc 1 24 3 view .LVU80
+ 329              	.LBE57:
+ 330              	.LBE56:
+ 331              		.loc 1 68 21 is_stmt 0 view .LVU81
+ 332 0054 4020C0E3 		bic	r2, r0, #64
+ 333              		.loc 1 68 45 view .LVU82
+ 334 0058 403003E2 		and	r3, r3, #64
+ 335              	.LVL16:
+ 336              		.loc 1 68 3 view .LVU83
+ 337 005c 033082E1 		orr	r3, r2, r3
+ 338              	.LVL17:
+ 339              	.LBB59:
+ 340              	.LBB58:
+  24:../firmware/armVIC.c **** }
+ 341              		.loc 1 24 3 view .LVU84
+ 342              		.syntax divided
+ 343              	@ 24 "../firmware/armVIC.c" 1
+ 344 0060 03F029E1 		 msr  cpsr, r3
+ 345              	@ 0 "" 2
+ 346              	.LVL18:
+  24:../firmware/armVIC.c **** }
+ 347              		.loc 1 24 3 view .LVU85
+ 348              		.arm
+ 349              		.syntax unified
+ 350              	.LBE58:
+ 351              	.LBE59:
+  69:../firmware/armVIC.c ****   return _cpsr;
+ 352              		.loc 1 69 3 is_stmt 1 view .LVU86
+  70:../firmware/armVIC.c **** }
+ 353              		.loc 1 70 1 is_stmt 0 view .LVU87
+ 354 0064 1EFF2FE1 		bx	lr
+ 355              		.cfi_endproc
+ 356              	.LFE6:
+ 358              		.align	2
+ 359              		.global	enableFIQ
+ 360              		.syntax unified
+ 361              		.arm
+ 362              		.fpu softvfp
+ 364              	enableFIQ:
+ 365              	.LFB7:
+  71:../firmware/armVIC.c **** 
+  72:../firmware/armVIC.c **** unsigned enableFIQ(void)
+  73:../firmware/armVIC.c **** {
+ 366              		.loc 1 73 1 is_stmt 1 view -0
+ 367              		.cfi_startproc
+ 368              		@ Function supports interworking.
+ 369              		@ args = 0, pretend = 0, frame = 0
+ 370              		@ frame_needed = 0, uses_anonymous_args = 0
+ 371              		@ link register save eliminated.
+  74:../firmware/armVIC.c ****   unsigned _cpsr;
+ 372              		.loc 1 74 3 view .LVU89
+  75:../firmware/armVIC.c **** 
+  76:../firmware/armVIC.c ****   _cpsr = __get_cpsr();
+ 373              		.loc 1 76 3 view .LVU90
+ 374              	.LBB60:
+ 375              	.LBI60:
+  15:../firmware/armVIC.c **** {
+ 376              		.loc 1 15 24 view .LVU91
+ 377              	.LBB61:
+  17:../firmware/armVIC.c ****   asm volatile (" mrs  %0, cpsr" : "=r" (retval) : /* no inputs */  );
+ 378              		.loc 1 17 3 view .LVU92
+  18:../firmware/armVIC.c ****   return retval;
+ 379              		.loc 1 18 3 view .LVU93
+ 380              		.syntax divided
+ 381              	@ 18 "../firmware/armVIC.c" 1
+ 382 0068 00000FE1 		 mrs  r0, cpsr
+ 383              	@ 0 "" 2
+ 384              	.LVL19:
+  19:../firmware/armVIC.c **** }
+ 385              		.loc 1 19 3 view .LVU94
+  19:../firmware/armVIC.c **** }
+ 386              		.loc 1 19 3 is_stmt 0 view .LVU95
+ 387              		.arm
+ 388              		.syntax unified
+ 389              	.LBE61:
+ 390              	.LBE60:
+  77:../firmware/armVIC.c ****   __set_cpsr(_cpsr & ~FIQ_MASK);
+ 391              		.loc 1 77 3 is_stmt 1 view .LVU96
+ 392              	.LBB62:
+ 393              	.LBI62:
+  22:../firmware/armVIC.c **** {
+ 394              		.loc 1 22 20 view .LVU97
+ 395              	.LBB63:
+  24:../firmware/armVIC.c **** }
+ 396              		.loc 1 24 3 view .LVU98
+ 397              	.LBE63:
+ 398              	.LBE62:
+ 399              		.loc 1 77 3 is_stmt 0 view .LVU99
+ 400 006c 4030C0E3 		bic	r3, r0, #64
+ 401              	.LVL20:
+ 402              	.LBB65:
+ 403              	.LBB64:
+  24:../firmware/armVIC.c **** }
+ 404              		.loc 1 24 3 view .LVU100
+ 405              		.syntax divided
+ 406              	@ 24 "../firmware/armVIC.c" 1
+ 407 0070 03F029E1 		 msr  cpsr, r3
+ 408              	@ 0 "" 2
+ 409              	.LVL21:
+  24:../firmware/armVIC.c **** }
+ 410              		.loc 1 24 3 view .LVU101
+ 411              		.arm
+ 412              		.syntax unified
+ 413              	.LBE64:
+ 414              	.LBE65:
+  78:../firmware/armVIC.c ****   return _cpsr;
+ 415              		.loc 1 78 3 is_stmt 1 view .LVU102
+  79:../firmware/armVIC.c **** }
+ 416              		.loc 1 79 1 is_stmt 0 view .LVU103
+ 417 0074 1EFF2FE1 		bx	lr
+ 418              		.cfi_endproc
+ 419              	.LFE7:
+ 421              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 armVIC.c
+     /tmp/ccfEZIoe.s:15     .text:0000000000000000 $a
+     /tmp/ccfEZIoe.s:22     .text:0000000000000000 disableIRQ
+     /tmp/ccfEZIoe.s:86     .text:0000000000000010 restoreIRQ
+     /tmp/ccfEZIoe.s:162    .text:000000000000002c enableIRQ
+     /tmp/ccfEZIoe.s:225    .text:000000000000003c disableFIQ
+     /tmp/ccfEZIoe.s:288    .text:000000000000004c restoreFIQ
+     /tmp/ccfEZIoe.s:364    .text:0000000000000068 enableFIQ
+
+NO UNDEFINED SYMBOLS
