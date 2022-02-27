@@ -22,7 +22,7 @@ Martin Thomas, Kaiserslautern, Germany
 <eversmith@heizung-thomas.de>
 ***************************************************************************/
 
-#include <LPC21XX.H> // LPC21XX Peripheral Registers
+#include <LPC21xx.h> // LPC21XX Peripheral Registers
 #include "LPC_CANAll.h"
 
 
