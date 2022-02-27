@@ -1281,34 +1281,34 @@
  860              		.file 8 "../firmware/uart.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 radio.c
-     /tmp/ccQk9SqC.s:15     .text:0000000000000000 $a
-     /tmp/ccQk9SqC.s:21     .text:0000000000000000 callbacks_call_all
-     /tmp/ccQk9SqC.s:87     .text:000000000000004c $d
-     /tmp/ccQk9SqC.s:91     .text:0000000000000050 $a
-     /tmp/ccQk9SqC.s:96     .text:0000000000000050 callbacks_call_one
-     /tmp/ccQk9SqC.s:177    .text:00000000000000b0 $d
-     /tmp/ccQk9SqC.s:181    .text:00000000000000b4 $a
-     /tmp/ccQk9SqC.s:187    .text:00000000000000b4 radio_add_reg_callback
-     /tmp/ccQk9SqC.s:229    .text:00000000000000e4 $d
-     /tmp/ccQk9SqC.s:233    .text:00000000000000e8 $a
-     /tmp/ccQk9SqC.s:239    .text:00000000000000e8 radio_del_reg_callback
-     /tmp/ccQk9SqC.s:282    .text:000000000000011c $d
-     /tmp/ccQk9SqC.s:286    .text:0000000000000120 $a
-     /tmp/ccQk9SqC.s:292    .text:0000000000000120 process_UART_in
-     /tmp/ccQk9SqC.s:347    .text:000000000000015c $d
-     /tmp/ccQk9SqC.s:353    .text:000000000000016c $a
-     /tmp/ccQk9SqC.s:374    .text:0000000000000190 $d
-     /tmp/ccQk9SqC.s:387    .text:00000000000001b0 $a
-     /tmp/ccQk9SqC.s:730    .text:0000000000000354 $d
+     /tmp/ccWQT5Au.s:15     .text:0000000000000000 $a
+     /tmp/ccWQT5Au.s:21     .text:0000000000000000 callbacks_call_all
+     /tmp/ccWQT5Au.s:87     .text:000000000000004c $d
+     /tmp/ccWQT5Au.s:91     .text:0000000000000050 $a
+     /tmp/ccWQT5Au.s:96     .text:0000000000000050 callbacks_call_one
+     /tmp/ccWQT5Au.s:177    .text:00000000000000b0 $d
+     /tmp/ccWQT5Au.s:181    .text:00000000000000b4 $a
+     /tmp/ccWQT5Au.s:187    .text:00000000000000b4 radio_add_reg_callback
+     /tmp/ccWQT5Au.s:229    .text:00000000000000e4 $d
+     /tmp/ccWQT5Au.s:233    .text:00000000000000e8 $a
+     /tmp/ccWQT5Au.s:239    .text:00000000000000e8 radio_del_reg_callback
+     /tmp/ccWQT5Au.s:282    .text:000000000000011c $d
+     /tmp/ccWQT5Au.s:286    .text:0000000000000120 $a
+     /tmp/ccWQT5Au.s:292    .text:0000000000000120 process_UART_in
+     /tmp/ccWQT5Au.s:347    .text:000000000000015c $d
+     /tmp/ccWQT5Au.s:353    .text:000000000000016c $a
+     /tmp/ccWQT5Au.s:374    .text:0000000000000190 $d
+     /tmp/ccWQT5Au.s:387    .text:00000000000001b0 $a
+     /tmp/ccWQT5Au.s:730    .text:0000000000000354 $d
                             *COM*:0000000000000001 reg8_table
                             *COM*:0000000000000002 reg16_table
                             *COM*:0000000000000004 reg32_table
-     /tmp/ccQk9SqC.s:738    .text:0000000000000368 $a
-     /tmp/ccQk9SqC.s:744    .text:0000000000000368 radio_init
-     /tmp/ccQk9SqC.s:833    .text:00000000000003d0 $d
-     /tmp/ccQk9SqC.s:842    .bss:0000000000000000 $d
-     /tmp/ccQk9SqC.s:846    .bss:0000000000000000 reg_callbacks
-     /tmp/ccQk9SqC.s:850    .bss:0000000000000040 regdata2
+     /tmp/ccWQT5Au.s:738    .text:0000000000000368 $a
+     /tmp/ccWQT5Au.s:744    .text:0000000000000368 radio_init
+     /tmp/ccWQT5Au.s:833    .text:00000000000003d0 $d
+     /tmp/ccWQT5Au.s:842    .bss:0000000000000000 $d
+     /tmp/ccWQT5Au.s:846    .bss:0000000000000000 reg_callbacks
+     /tmp/ccWQT5Au.s:850    .bss:0000000000000040 regdata2
 
 UNDEFINED SYMBOLS
 uart0_waitch

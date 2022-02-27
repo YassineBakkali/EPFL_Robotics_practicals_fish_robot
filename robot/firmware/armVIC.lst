@@ -546,12 +546,12 @@
  421              	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 armVIC.c
-     /tmp/ccfEZIoe.s:15     .text:0000000000000000 $a
-     /tmp/ccfEZIoe.s:22     .text:0000000000000000 disableIRQ
-     /tmp/ccfEZIoe.s:86     .text:0000000000000010 restoreIRQ
-     /tmp/ccfEZIoe.s:162    .text:000000000000002c enableIRQ
-     /tmp/ccfEZIoe.s:225    .text:000000000000003c disableFIQ
-     /tmp/ccfEZIoe.s:288    .text:000000000000004c restoreFIQ
-     /tmp/ccfEZIoe.s:364    .text:0000000000000068 enableFIQ
+     /tmp/cc9DLxV6.s:15     .text:0000000000000000 $a
+     /tmp/cc9DLxV6.s:22     .text:0000000000000000 disableIRQ
+     /tmp/cc9DLxV6.s:86     .text:0000000000000010 restoreIRQ
+     /tmp/cc9DLxV6.s:162    .text:000000000000002c enableIRQ
+     /tmp/cc9DLxV6.s:225    .text:000000000000003c disableFIQ
+     /tmp/cc9DLxV6.s:288    .text:000000000000004c restoreFIQ
+     /tmp/cc9DLxV6.s:364    .text:0000000000000068 enableFIQ
 
 NO UNDEFINED SYMBOLS

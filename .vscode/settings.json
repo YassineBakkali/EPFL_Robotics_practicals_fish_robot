@@ -5,6 +5,7 @@
         "string_view": "c",
         "initializer_list": "c",
         "utility": "c",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "registers.h": "c"
     }
 }

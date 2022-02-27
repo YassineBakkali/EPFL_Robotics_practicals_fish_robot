@@ -5,7 +5,7 @@
 #include "registers.h"
 #include "hardware.h"
 
-const uint8_t MOTOR_ADDR = 21;
+const uint8_t MOTOR_ADDR = 21; //TODO: change address
 
 void motor_demo_mode()
 {
