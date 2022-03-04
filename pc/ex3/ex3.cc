@@ -1,35 +1,27 @@
 #include <iostream>
 #include "remregs.h"
 #include "robot.h"
+#include "regdefs.h"
+#include "utils.h"
+#include <stdio.h>
 
 using namespace std;
 
-#define BODY_NUMBER  7
+const uint8_t LIMB_NUMBER[BODY_NUMBER] = {2, 0};
+const uint8_t MOTOR_ADDR[BODY_NUMBER] = {72, 21};
 
 const uint8_t RADIO_CHANNEL = 201;         ///< robot radio channel
 const char* INTERFACE = "COM1";            ///< robot radio interface
 
-
-// Displays the contents of a multibyte register as a list of bytes
-void display_multibyte_register(CRemoteRegs& regs, const uint8_t addr)
+void display_limbs_pos(CRemoteRegs& regs)
 {
   uint8_t data_buffer[32], len;
-  if (regs.get_reg_mb(addr, data_buffer, len)) {
-    cout << (int) len << " pos for body " << addr << ": ";
-    for (unsigned int i(0); i < len; i++) {
-      if (i > 0) cout << ", ";
-      cout << (int) data_buffer[i];
-    }
-    cout << endl;
-  } else {
-    cerr << "Unable to read multibyte register." << endl;
-  }
-}
-
-void read_position(CRemoteRegs& regs)
-{
-    for(uint8_t i = 0; i < BODY_NUMBER; ++i ){
-        display_multibyte_register(regs, i);
+    if (regs.get_reg_mb(0, data_buffer, len)) {
+      for (uint8_t i = 0; i < len; i++) {
+        cout << (int)((int8_t)data_buffer[i]) << ( i == len-1 ? "       \r" : ", " ) ;
+      }
+    } else {
+      cerr << "Unable to read multibyte register." << endl;
     }
 }
 
@@ -45,9 +37,10 @@ int main()
   reboot_head(regs);
   
   // Register display demo
-  while(1){
-    read_position(regs);
+  while(!kbhit()){
+    display_limbs_pos(regs);
   }
+
   regs.close();
   return 0;
 }

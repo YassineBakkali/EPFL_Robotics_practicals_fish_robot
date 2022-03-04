@@ -1,26 +1,23 @@
-   1              		.cpu arm7tdmi
-   2              		.eabi_attribute 20, 1
-   3              		.eabi_attribute 21, 1
-   4              		.eabi_attribute 23, 3
-   5              		.eabi_attribute 24, 1
-   6              		.eabi_attribute 25, 1
-   7              		.eabi_attribute 26, 1
-   8              		.eabi_attribute 30, 4
-   9              		.eabi_attribute 34, 0
-  10              		.eabi_attribute 18, 4
-  11              		.file	"uartISR.c"
-  12              		.text
-  13              	.Ltext0:
-  14              		.cfi_sections	.debug_frame
-  15              		.align	2
-  16              		.global	uart0ISR
-  17              		.arch armv4t
-  18              		.syntax unified
-  19              		.arm
-  20              		.fpu softvfp
-  22              	uart0ISR:
-  23              	.LFB2:
-  24              		.file 1 "../firmware/uartISR.c"
+   1              		.cpu arm7tdmi-s
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 4
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.file	"uartISR.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.align	2
+  17              		.global	uart0ISR
+  19              	uart0ISR:
+  20              	.LFB2:
+  21              		.file 1 "../firmware/uartISR.c"
    1:../firmware/uartISR.c **** #include "LPC21xx.h"
    2:../firmware/uartISR.c **** #include "uart.h"
    3:../firmware/uartISR.c **** #include "uartISR.h"
@@ -44,47 +41,47 @@
   21:../firmware/uartISR.c **** 
   22:../firmware/uartISR.c **** void uart0ISR(void)
   23:../firmware/uartISR.c **** {
-  25              		.loc 1 23 1 view -0
-  26              		.cfi_startproc
-  27              		@ Function supports interworking.
-  28              		@ Naked Function: prologue and epilogue provided by programmer.
-  29              		@ args = 0, pretend = 0, frame = 0
-  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  22              		.loc 1 23 0
+  23              		.cfi_startproc
+  24              		@ Function supports interworking.
+  25              		@ Naked Function: prologue and epilogue provided by programmer.
+  26              		@ args = 0, pretend = 0, frame = 0
+  27              		@ frame_needed = 0, uses_anonymous_args = 0
   24:../firmware/uartISR.c ****   uint8_t iid;
-  31              		.loc 1 24 3 view .LVU1
   25:../firmware/uartISR.c **** 
   26:../firmware/uartISR.c ****   // perform proper ISR entry so thumb-interwork works properly
   27:../firmware/uartISR.c ****   ISR_ENTRY();
-  32              		.loc 1 27 3 view .LVU2
-  33              		.syntax divided
-  34              	@ 27 "../firmware/uartISR.c" 1
-  35 0000 04E04EE2 		 sub   lr, lr,#4
-  36 0004 FF5F2DE9 	 stmfd sp!,{r0-r12,lr}
-  37 0008 00104FE1 	 mrs   r1, spsr
-  38 000c 02002DE9 	 stmfd sp!,{r1}
-  39              	@ 0 "" 2
+  28              		.loc 1 27 0
+  29              	@ 27 "../firmware/uartISR.c" 1
+  30 0000 04E04EE2 		 sub   lr, lr,#4
+  31 0004 FF5F2DE9 	 stmfd sp!,{r0-r12,lr}
+  32 0008 00104FE1 	 mrs   r1, spsr
+  33 000c 02002DE9 	 stmfd sp!,{r1}
+  34              	@ 0 "" 2
   28:../firmware/uartISR.c **** 
   29:../firmware/uartISR.c ****   // loop until not more interrupt sources
   30:../firmware/uartISR.c ****   while (((iid = U0IIR) & UIIR_NO_INT) == 0)
-  40              		.loc 1 30 3 view .LVU3
-  41              		.loc 1 30 16 is_stmt 0 view .LVU4
-  42              		.arm
-  43              		.syntax unified
-  44 0010 58409FE5 		ldr	r4, .L11
-  45              	.L2:
-  46              		.loc 1 30 9 is_stmt 1 view .LVU5
-  47              		.loc 1 30 16 is_stmt 0 view .LVU6
-  48 0014 0830D4E5 		ldrb	r3, [r4, #8]	@ zero_extendqisi2
-  49              	.LVL0:
-  50              		.loc 1 30 9 view .LVU7
-  51 0018 010013E3 		tst	r3, #1
-  52 001c 0500000A 		beq	.L7
+  35              		.loc 1 30 0
+  36 0010 64409FE5 		ldr	r4, .L18
+  37 0014 0F0000EA 		b	.L16
+  38              	.L7:
   31:../firmware/uartISR.c ****   {
   32:../firmware/uartISR.c ****     // identify & process the highest priority interrupt
   33:../firmware/uartISR.c ****     switch (iid & UIIR_ID_MASK)
+  39              		.loc 1 33 0
+  40 0018 0E3003E2 		and	r3, r3, #14
+  41 001c 060053E3 		cmp	r3, #6
   34:../firmware/uartISR.c ****     {
   35:../firmware/uartISR.c ****     case UIIR_RLS_INT:                // Receive Line Status
   36:../firmware/uartISR.c ****       U0LSR;                          // read LSR to clear
+  42              		.loc 1 36 0
+  43 0020 1430D405 		ldreqb	r3, [r4, #20]	@ zero_extendqisi2
+  33:../firmware/uartISR.c ****     switch (iid & UIIR_ID_MASK)
+  44              		.loc 1 33 0
+  45 0024 0B00000A 		beq	.L16
+  46 0028 0C0053E3 		cmp	r3, #12
+  47 002c 0400000A 		beq	.L12
+  48 0030 040053E3 		cmp	r3, #4
   37:../firmware/uartISR.c ****       break;
   38:../firmware/uartISR.c **** 
   39:../firmware/uartISR.c ****     case UIIR_CTI_INT:                // Character Timeout Indicator
@@ -96,198 +93,148 @@
   45:../firmware/uartISR.c **** 
   46:../firmware/uartISR.c ****     default:                          // Unknown
   47:../firmware/uartISR.c ****       U0LSR;
+  49              		.loc 1 47 0
+  50 0034 1430D415 		ldrneb	r3, [r4, #20]	@ zero_extendqisi2
   48:../firmware/uartISR.c ****       U0RBR;
+  51              		.loc 1 48 0
+  52 0038 0030D415 		ldrneb	r3, [r4, #0]	@ zero_extendqisi2
+  33:../firmware/uartISR.c ****     switch (iid & UIIR_ID_MASK)
+  53              		.loc 1 33 0
+  54 003c 0500001A 		bne	.L16
+  55 0040 FFFFFFEA 		b	.L12
+  56              	.L12:
+  42:../firmware/uartISR.c ****         process_UART_in();
+  57              		.loc 1 42 0 discriminator 1
+  58 0044 FEFFFFEB 		bl	process_UART_in
+  59              	.LVL0:
+  43:../firmware/uartISR.c ****       } while (U0LSR & ULSR_RDR);
+  60              		.loc 1 43 0 discriminator 1
+  61 0048 1430D4E5 		ldrb	r3, [r4, #20]	@ zero_extendqisi2
+  62 004c 010013E3 		tst	r3, #1
+  63 0050 FBFFFF1A 		bne	.L12
+  64 0054 FFFFFFEA 		b	.L16
+  65              	.L16:
+  30:../firmware/uartISR.c ****   while (((iid = U0IIR) & UIIR_NO_INT) == 0)
+  66              		.loc 1 30 0 discriminator 1
+  67 0058 0830D4E5 		ldrb	r3, [r4, #8]	@ zero_extendqisi2
+  68 005c 010013E3 		tst	r3, #1
+  69 0060 ECFFFF0A 		beq	.L7
   49:../firmware/uartISR.c ****       break;
   50:../firmware/uartISR.c ****     }
   51:../firmware/uartISR.c ****   }
   52:../firmware/uartISR.c **** 
   53:../firmware/uartISR.c ****   VICVectAddr = 0x00000000;             // clear this interrupt from the VIC
-  53              		.loc 1 53 3 is_stmt 1 view .LVU8
-  54              		.loc 1 53 15 is_stmt 0 view .LVU9
-  55 0020 0F3CE0E3 		mvn	r3, #3840
-  56              	.LVL1:
-  57              		.loc 1 53 15 view .LVU10
-  58 0024 0020A0E3 		mov	r2, #0
-  59 0028 CF2003E5 		str	r2, [r3, #-207]
+  70              		.loc 1 53 0
+  71 0064 0020A0E3 		mov	r2, #0
+  72 0068 0030E0E3 		mvn	r3, #0
+  73 006c CF2F03E5 		str	r2, [r3, #-4047]
   54:../firmware/uartISR.c ****   ISR_EXIT();                           // recover registers and return
-  60              		.loc 1 54 3 is_stmt 1 view .LVU11
-  61              		.syntax divided
-  62              	@ 54 "../firmware/uartISR.c" 1
-  63 002c 0200BDE8 		 ldmfd sp!,{r1}
-  64 0030 01F061E1 	 msr   spsr_c,r1
-  65 0034 FF9FFDE8 	 ldmfd sp!,{r0-r12,pc}^
-  66              	@ 0 "" 2
+  74              		.loc 1 54 0
+  75              	@ 54 "../firmware/uartISR.c" 1
+  76 0070 0200BDE8 		 ldmfd sp!,{r1}
+  77 0074 01F061E1 	 msr   spsr_c,r1
+  78 0078 FF9FFDE8 	 ldmfd sp!,{r0-r12,pc}^
+  79              	@ 0 "" 2
   55:../firmware/uartISR.c **** }
-  67              		.loc 1 55 1 is_stmt 0 view .LVU12
-  68              		.arm
-  69              		.syntax unified
-  70              	.LVL2:
-  71              	.L7:
-  33:../firmware/uartISR.c ****     {
-  72              		.loc 1 33 5 is_stmt 1 view .LVU13
-  73 0038 0E2003E2 		and	r2, r3, #14
-  74 003c 060052E3 		cmp	r2, #6
-  36:../firmware/uartISR.c ****       break;
-  75              		.loc 1 36 7 is_stmt 0 view .LVU14
-  76 0040 1430D405 		ldrbeq	r3, [r4, #20]	@ zero_extendqisi2
-  77              	.LVL3:
-  33:../firmware/uartISR.c ****     {
-  78              		.loc 1 33 5 view .LVU15
-  79 0044 F2FFFF0A 		beq	.L2
-  80 0048 063003E2 		and	r3, r3, #6
-  81 004c 040053E3 		cmp	r3, #4
-  47:../firmware/uartISR.c ****       U0RBR;
-  82              		.loc 1 47 7 view .LVU16
-  83 0050 1430D415 		ldrbne	r3, [r4, #20]	@ zero_extendqisi2
-  48:../firmware/uartISR.c ****       break;
-  84              		.loc 1 48 7 is_stmt 1 view .LVU17
-  85 0054 0030D415 		ldrbne	r3, [r4]	@ zero_extendqisi2
-  33:../firmware/uartISR.c ****     {
-  86              		.loc 1 33 5 is_stmt 0 view .LVU18
-  87 0058 EDFFFF1A 		bne	.L2
-  88              	.L4:
-  41:../firmware/uartISR.c ****         process_UART_in();
-  89              		.loc 1 41 7 is_stmt 1 discriminator 1 view .LVU19
-  42:../firmware/uartISR.c ****       } while (U0LSR & ULSR_RDR);
-  90              		.loc 1 42 9 discriminator 1 view .LVU20
-  91 005c FEFFFFEB 		bl	process_UART_in
-  92              	.LVL4:
-  43:../firmware/uartISR.c ****       break;
-  93              		.loc 1 43 15 discriminator 1 view .LVU21
-  43:../firmware/uartISR.c ****       break;
-  94              		.loc 1 43 16 is_stmt 0 discriminator 1 view .LVU22
-  95 0060 1430D4E5 		ldrb	r3, [r4, #20]	@ zero_extendqisi2
-  43:../firmware/uartISR.c ****       break;
-  96              		.loc 1 43 7 discriminator 1 view .LVU23
-  97 0064 010013E3 		tst	r3, #1
-  98 0068 FBFFFF1A 		bne	.L4
-  99 006c E8FFFFEA 		b	.L2
- 100              	.L12:
- 101              		.align	2
- 102              	.L11:
- 103 0070 00C000E0 		.word	-536821760
- 104              		.cfi_endproc
- 105              	.LFE2:
- 107              		.align	2
- 108              		.global	init_uart0_isr
- 109              		.syntax unified
- 110              		.arm
- 111              		.fpu softvfp
- 113              	init_uart0_isr:
- 114              	.LFB0:
-   8:../firmware/uartISR.c ****   VICIntSelect &= ~VIC_BIT(VIC_UART0);    // UART0 selected as IRQ
- 115              		.loc 1 8 1 is_stmt 1 view -0
- 116              		.cfi_startproc
- 117              		@ Function supports interworking.
- 118              		@ args = 0, pretend = 0, frame = 0
- 119              		@ frame_needed = 0, uses_anonymous_args = 0
- 120              		@ link register save eliminated.
-   9:../firmware/uartISR.c ****   VICIntEnable = VIC_BIT(VIC_UART0);      // UART0 interrupt enabled
- 121              		.loc 1 9 3 view .LVU25
-   9:../firmware/uartISR.c ****   VICIntEnable = VIC_BIT(VIC_UART0);      // UART0 interrupt enabled
- 122              		.loc 1 9 16 is_stmt 0 view .LVU26
- 123 0074 0F3CE0E3 		mvn	r3, #3840
- 124 0078 F32013E5 		ldr	r2, [r3, #-243]
- 125 007c 4020C2E3 		bic	r2, r2, #64
- 126 0080 F32003E5 		str	r2, [r3, #-243]
-  10:../firmware/uartISR.c ****   VICVectCntl0 = VIC_ENABLE | VIC_UART0;  // UART0 is IRQ0
- 127              		.loc 1 10 3 is_stmt 1 view .LVU27
-  10:../firmware/uartISR.c ****   VICVectCntl0 = VIC_ENABLE | VIC_UART0;  // UART0 is IRQ0
- 128              		.loc 1 10 16 is_stmt 0 view .LVU28
- 129 0084 4020A0E3 		mov	r2, #64
- 130 0088 EF2003E5 		str	r2, [r3, #-239]
-  11:../firmware/uartISR.c ****   VICVectAddr0 = (uint32_t) uart0ISR;
- 131              		.loc 1 11 3 is_stmt 1 view .LVU29
-  11:../firmware/uartISR.c ****   VICVectAddr0 = (uint32_t) uart0ISR;
- 132              		.loc 1 11 16 is_stmt 0 view .LVU30
- 133 008c 2620A0E3 		mov	r2, #38
- 134 0090 012183E5 		str	r2, [r3, #257]
-  12:../firmware/uartISR.c ****   U0IER = UIER_ERBFI;                     // enable receiver interrupts
- 135              		.loc 1 12 3 is_stmt 1 view .LVU31
-  12:../firmware/uartISR.c ****   U0IER = UIER_ERBFI;                     // enable receiver interrupts
- 136              		.loc 1 12 18 is_stmt 0 view .LVU32
- 137 0094 10209FE5 		ldr	r2, .L14
-  12:../firmware/uartISR.c ****   U0IER = UIER_ERBFI;                     // enable receiver interrupts
- 138              		.loc 1 12 16 view .LVU33
- 139 0098 012083E5 		str	r2, [r3, #1]
-  13:../firmware/uartISR.c **** }
- 140              		.loc 1 13 3 is_stmt 1 view .LVU34
-  13:../firmware/uartISR.c **** }
- 141              		.loc 1 13 9 is_stmt 0 view .LVU35
- 142 009c 0120A0E3 		mov	r2, #1
- 143 00a0 08309FE5 		ldr	r3, .L14+4
- 144 00a4 0420C3E5 		strb	r2, [r3, #4]
-  14:../firmware/uartISR.c **** 
- 145              		.loc 1 14 1 view .LVU36
- 146 00a8 1EFF2FE1 		bx	lr
- 147              	.L15:
- 148              		.align	2
- 149              	.L14:
- 150 00ac 00000000 		.word	uart0ISR
- 151 00b0 00C000E0 		.word	-536821760
- 152              		.cfi_endproc
- 153              	.LFE0:
- 155              		.align	2
- 156              		.global	uart0_waitch
- 157              		.syntax unified
- 158              		.arm
- 159              		.fpu softvfp
- 161              	uart0_waitch:
- 162              	.LFB1:
-  17:../firmware/uartISR.c ****   while (!(U0LSR & ULSR_RDR));
- 163              		.loc 1 17 1 is_stmt 1 view -0
- 164              		.cfi_startproc
- 165              		@ Function supports interworking.
- 166              		@ args = 0, pretend = 0, frame = 0
- 167              		@ frame_needed = 0, uses_anonymous_args = 0
- 168              		@ link register save eliminated.
-  18:../firmware/uartISR.c ****   return U0RBR;
- 169              		.loc 1 18 3 view .LVU38
-  18:../firmware/uartISR.c ****   return U0RBR;
- 170              		.loc 1 18 12 is_stmt 0 view .LVU39
- 171 00b4 10309FE5 		ldr	r3, .L20
- 172              	.L17:
-  18:../firmware/uartISR.c ****   return U0RBR;
- 173              		.loc 1 18 30 is_stmt 1 discriminator 1 view .LVU40
-  18:../firmware/uartISR.c ****   return U0RBR;
- 174              		.loc 1 18 9 discriminator 1 view .LVU41
-  18:../firmware/uartISR.c ****   return U0RBR;
- 175              		.loc 1 18 12 is_stmt 0 discriminator 1 view .LVU42
- 176 00b8 1420D3E5 		ldrb	r2, [r3, #20]	@ zero_extendqisi2
-  18:../firmware/uartISR.c ****   return U0RBR;
- 177              		.loc 1 18 9 discriminator 1 view .LVU43
- 178 00bc 010012E3 		tst	r2, #1
- 179 00c0 FCFFFF0A 		beq	.L17
-  19:../firmware/uartISR.c **** }
- 180              		.loc 1 19 3 is_stmt 1 view .LVU44
-  19:../firmware/uartISR.c **** }
- 181              		.loc 1 19 10 is_stmt 0 view .LVU45
- 182 00c4 0000D3E5 		ldrb	r0, [r3]	@ zero_extendqisi2
-  20:../firmware/uartISR.c **** 
- 183              		.loc 1 20 1 view .LVU46
- 184 00c8 1EFF2FE1 		bx	lr
- 185              	.L21:
- 186              		.align	2
- 187              	.L20:
- 188 00cc 00C000E0 		.word	-536821760
- 189              		.cfi_endproc
- 190              	.LFE1:
- 192              	.Letext0:
- 193              		.file 2 "../firmware/lpcUART.h"
- 194              		.file 3 "../firmware/lpcVIC.h"
- 195              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 196              		.file 5 "../firmware/radio.h"
+  80              		.loc 1 55 0
+  81              	.L19:
+  82              		.align	2
+  83              	.L18:
+  84 007c 00C000E0 		.word	-536821760
+  85              		.cfi_endproc
+  86              	.LFE2:
+  88              		.align	2
+  89              		.global	init_uart0_isr
+  91              	init_uart0_isr:
+  92              	.LFB0:
+   8:../firmware/uartISR.c **** {
+  93              		.loc 1 8 0
+  94              		.cfi_startproc
+  95              		@ Function supports interworking.
+  96              		@ args = 0, pretend = 0, frame = 0
+  97              		@ frame_needed = 0, uses_anonymous_args = 0
+  98              		@ link register save eliminated.
+   9:../firmware/uartISR.c ****   VICIntSelect &= ~VIC_BIT(VIC_UART0);    // UART0 selected as IRQ
+  99              		.loc 1 9 0
+ 100 0080 0030E0E3 		mvn	r3, #0
+ 101 0084 F32F13E5 		ldr	r2, [r3, #-4083]
+ 102 0088 4020C2E3 		bic	r2, r2, #64
+ 103 008c F32F03E5 		str	r2, [r3, #-4083]
+  10:../firmware/uartISR.c ****   VICIntEnable = VIC_BIT(VIC_UART0);      // UART0 interrupt enabled
+ 104              		.loc 1 10 0
+ 105 0090 4020A0E3 		mov	r2, #64
+ 106 0094 EF2F03E5 		str	r2, [r3, #-4079]
+  11:../firmware/uartISR.c ****   VICVectCntl0 = VIC_ENABLE | VIC_UART0;  // UART0 is IRQ0
+ 107              		.loc 1 11 0
+ 108 0098 2620A0E3 		mov	r2, #38
+ 109 009c FF2D03E5 		str	r2, [r3, #-3583]
+  12:../firmware/uartISR.c ****   VICVectAddr0 = (uint32_t) uart0ISR;
+ 110              		.loc 1 12 0
+ 111 00a0 10209FE5 		ldr	r2, .L21
+ 112 00a4 FF2E03E5 		str	r2, [r3, #-3839]
+  13:../firmware/uartISR.c ****   U0IER = UIER_ERBFI;                     // enable receiver interrupts
+ 113              		.loc 1 13 0
+ 114 00a8 0C309FE5 		ldr	r3, .L21+4
+ 115 00ac 0120A0E3 		mov	r2, #1
+ 116 00b0 0420C3E5 		strb	r2, [r3, #4]
+ 117 00b4 1EFF2FE1 		bx	lr
+ 118              	.L22:
+ 119              		.align	2
+ 120              	.L21:
+ 121 00b8 00000000 		.word	uart0ISR
+ 122 00bc 00C000E0 		.word	-536821760
+ 123              		.cfi_endproc
+ 124              	.LFE0:
+ 126              		.align	2
+ 127              		.global	uart0_waitch
+ 129              	uart0_waitch:
+ 130              	.LFB1:
+  17:../firmware/uartISR.c **** {
+ 131              		.loc 1 17 0
+ 132              		.cfi_startproc
+ 133              		@ Function supports interworking.
+ 134              		@ args = 0, pretend = 0, frame = 0
+ 135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 136              		@ link register save eliminated.
+  18:../firmware/uartISR.c ****   while (!(U0LSR & ULSR_RDR));
+ 137              		.loc 1 18 0
+ 138 00c0 14209FE5 		ldr	r2, .L29
+ 139              	.L24:
+  18:../firmware/uartISR.c ****   while (!(U0LSR & ULSR_RDR));
+ 140              		.loc 1 18 0 is_stmt 0 discriminator 1
+ 141 00c4 1430D2E5 		ldrb	r3, [r2, #20]	@ zero_extendqisi2
+ 142 00c8 010013E3 		tst	r3, #1
+ 143 00cc FCFFFF0A 		beq	.L24
+  19:../firmware/uartISR.c ****   return U0RBR;
+ 144              		.loc 1 19 0 is_stmt 1
+ 145 00d0 04309FE5 		ldr	r3, .L29
+ 146 00d4 0000D3E5 		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+  20:../firmware/uartISR.c **** }
+ 147              		.loc 1 20 0
+ 148 00d8 1EFF2FE1 		bx	lr
+ 149              	.L30:
+ 150              		.align	2
+ 151              	.L29:
+ 152 00dc 00C000E0 		.word	-536821760
+ 153              		.cfi_endproc
+ 154              	.LFE1:
+ 156              	.Letext0:
+ 157              		.file 2 "../firmware/lpcUART.h"
+ 158              		.file 3 "../firmware/lpcVIC.h"
+ 159              		.file 4 "c:/yagarto/lib/gcc/../../arm-none-eabi/sys-include/stdint.h"
+ 160              		.file 5 "../firmware/radio.h"
 DEFINED SYMBOLS
-                            *ABS*:0000000000000000 uartISR.c
-     /tmp/ccix7dOG.s:15     .text:0000000000000000 $a
-     /tmp/ccix7dOG.s:22     .text:0000000000000000 uart0ISR
-     /tmp/ccix7dOG.s:103    .text:0000000000000070 $d
-     /tmp/ccix7dOG.s:107    .text:0000000000000074 $a
-     /tmp/ccix7dOG.s:113    .text:0000000000000074 init_uart0_isr
-     /tmp/ccix7dOG.s:150    .text:00000000000000ac $d
-     /tmp/ccix7dOG.s:155    .text:00000000000000b4 $a
-     /tmp/ccix7dOG.s:161    .text:00000000000000b4 uart0_waitch
-     /tmp/ccix7dOG.s:188    .text:00000000000000cc $d
+                            *ABS*:00000000 uartISR.c
+C:\Users\bakkali\AppData\Local\Temp\ccjGIpfW.s:16     .text:00000000 $a
+C:\Users\bakkali\AppData\Local\Temp\ccjGIpfW.s:19     .text:00000000 uart0ISR
+C:\Users\bakkali\AppData\Local\Temp\ccjGIpfW.s:84     .text:0000007c $d
+C:\Users\bakkali\AppData\Local\Temp\ccjGIpfW.s:88     .text:00000080 $a
+C:\Users\bakkali\AppData\Local\Temp\ccjGIpfW.s:91     .text:00000080 init_uart0_isr
+C:\Users\bakkali\AppData\Local\Temp\ccjGIpfW.s:121    .text:000000b8 $d
+C:\Users\bakkali\AppData\Local\Temp\ccjGIpfW.s:126    .text:000000c0 $a
+C:\Users\bakkali\AppData\Local\Temp\ccjGIpfW.s:129    .text:000000c0 uart0_waitch
+C:\Users\bakkali\AppData\Local\Temp\ccjGIpfW.s:152    .text:000000dc $d
+                     .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
 process_UART_in

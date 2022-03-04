@@ -2,10 +2,13 @@
 #define __MODES_H
 
 /// Idle mode: do nothing
-#define IMODE_IDLE          0
+#define IMODE_IDLE           0
 
 /// Motor move mode
-#define IMODE_MOTOR_DEMO    1
+#define IMODE_MOTOR_DEMO     1
+
+/// Motor read setpoint mode
+#define IMODE_MOTOR_SETPOINT 2
 
 /// The main loop for mode switching
 void main_mode_loop(void);
