@@ -70,7 +70,7 @@ int main()
   return 0;
 }
 
-uint32_t calculate_rgb_from_pos(CRemoteRegs regs, double x, double y) {
+uint32_t calculate_rgb_from_pos(CRemoteRegs &regs, double x, double y) {
   uint32_t rgb = 0;
   r = (uint8_t) (x/POOL_LENGTH * MAX_CHANNEL_VALUE); // check if x, y are always positive
   g = GREEN_VALUE;
@@ -80,10 +80,10 @@ uint32_t calculate_rgb_from_pos(CRemoteRegs regs, double x, double y) {
   set_led_color(regs, rgb);
 }
 
-void turn_off_leds(CRemoteRegs regs) {
+void turn_off_leds(CRemoteRegs &regs) {
   regs.set_reg_b(REG_LED, LED_MODE_OFF);
 }
 
-void set_led_color(CRemoteRegs regs, uint32_t rgb) {
+void set_led_color(CRemoteRegs &regs, uint32_t rgb) {
   regs.set_reg_dw(REG_LED_COLOR, rgb);
 }
