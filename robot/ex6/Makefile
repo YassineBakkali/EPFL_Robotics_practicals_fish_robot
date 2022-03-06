@@ -9,7 +9,7 @@ SRC =
 
 # List C source files here which must be compiled in ARM-Mode.
 # use file-extension c for "c-only"-files
-SRCARM = $(SRC_SUBDIR)uartISR.c $(SRC_SUBDIR)armVIC.c $(SRC_SUBDIR)radio.c $(SRC_SUBDIR)LPC_CANAll.c $(SRC_SUBDIR)sysTime.c $(SRC_SUBDIR)uart.c $(SRC_SUBDIR)i2c.c $(SRC_SUBDIR)can.c $(SRC_SUBDIR)hardware.c $(SRC_SUBDIR)timerISR.c $(SRC_SUBDIR)adc.c $(SRC_SUBDIR)printf.c $(SRC_SUBDIR)utils.c $(SRC_SUBDIR)lutmath.c $(SRC_SUBDIR)registers.c $(SRC_SUBDIR)robot.c modes.c $(TARGET).c
+SRCARM = $(SRC_SUBDIR)uartISR.c $(SRC_SUBDIR)armVIC.c $(SRC_SUBDIR)radio.c $(SRC_SUBDIR)LPC_CANAll.c $(SRC_SUBDIR)sysTime.c $(SRC_SUBDIR)uart.c $(SRC_SUBDIR)i2c.c $(SRC_SUBDIR)can.c $(SRC_SUBDIR)hardware.c $(SRC_SUBDIR)timerISR.c $(SRC_SUBDIR)adc.c $(SRC_SUBDIR)printf.c $(SRC_SUBDIR)utils.c $(SRC_SUBDIR)lutmath.c $(SRC_SUBDIR)registers.c $(SRC_SUBDIR)robot.c $(TARGET).c
 
 # List C++ source files here.
 # use file-extension cpp for C++-files (use extension .cpp)
