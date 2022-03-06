@@ -5,6 +5,7 @@
 #include "registers.h"
 #include "hardware.h"
 #include "regdefs.h"
+#include "can.h"
 #include <stdint.h>
 
 #define BODY_NUMBER     2
@@ -15,54 +16,27 @@ static uint8_t amplitude = 40;
 static uint8_t frequency = 0;
 static uint8_t phi = 0;
 
-#undef
+#undef  FREQ_MAX 
 #define FREQ_MAX 1.5f
 
-#define PHI_MIN 0f
+#define PHI_MIN 0.f
 #define PHI_MAX M_PI
 
 #define SIDE_FIN_AMP_RATIO 4
 
-static int8_t register_handler(uint8_t operation, uint8_t address, RadioData* radio_data)
-{
-    if (operation == ROP_WRITE_8){
-      switch(address) {
-        case REG8_MODE: 
-          reg8_table[REG8_MODE] = radio_data->byte;
-          return TRUE;
-        case REG_AMP:
-          amplitude = radio_data->byte;
-          bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
-          return TRUE;
-        case REG_FREQ:
-          frequency = radio_data->byte;
-          bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
-          return TRUE;
-        case REG_PHI:
-          phi = radio_data->byte;
-          bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
-          return TRUE;
-        case REG_LED:
-          turn_off_all_leds();
-          return TRUE;
-      }
-    }
-  return FALSE;
-}
-
-void turn_off_all_leds(void) {
+static void turn_off_all_leds(void) {
   uint8_t i = 0;
   for (i = 0; i < BODY_NUMBER; ++i) {
     set_reg_value_dw(MOTOR_ADDR[i], MREG32_LED, 0);
   }
-  set_rgb(0. 0, 0);
+  set_rgb(0, 0, 0);
 }
 
 
-move_mode(uint8_t left, uint8_t right, uint8_t caudal, uint8_t body) {
+static void move_mode(uint8_t left, uint8_t right, uint8_t caudal, uint8_t body) {
   uint32_t dt, cycletimer;
-  float my_time, delta_t, l;
-  int8_t l_rounded;
+  float my_time, delta_t, l, l_offset;
+  int8_t l_rounded, l_offset_rounded;
 
   cycletimer = getSysTICs();
   my_time = 0;
@@ -144,7 +118,6 @@ move_mode(uint8_t left, uint8_t right, uint8_t caudal, uint8_t body) {
 
   } while (reg8_table[REG8_MODE] != MODE_IDLE);
 
-  bus_set(MOTOR_ADDR, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
   uint8_t i = 0;
   uint8_t j = 0;
   for (i = 0; i < BODY_NUMBER; ++i) {
@@ -161,6 +134,34 @@ move_mode(uint8_t left, uint8_t right, uint8_t caudal, uint8_t body) {
   // Back to the "normal" green
   set_color(2);
 }
+
+static int8_t register_handler(uint8_t operation, uint8_t address, RadioData* radio_data)
+{
+    if (operation == ROP_WRITE_8){
+      switch(address) {
+        case REG8_MODE: 
+          reg8_table[REG8_MODE] = radio_data->byte;
+          return TRUE;
+        case REG_AMP:
+          amplitude = radio_data->byte;
+          bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
+          return TRUE;
+        case REG_FREQ:
+          frequency = radio_data->byte;
+          bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
+          return TRUE;
+        case REG_PHI:
+          phi = radio_data->byte;
+          bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
+          return TRUE;
+        case REG_LED:
+          turn_off_all_leds();
+          return TRUE;
+      }
+    }
+  return FALSE;
+}
+
 
 void main_mode_loop()
 {

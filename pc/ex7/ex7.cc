@@ -25,7 +25,7 @@ using namespace std;
 #define PHI_MIN 0.5f
 #define PHI_MAX 1.5f
 
-#define REG_LED         1
+#define REG_LED         4
 #define LED_MODE_OFF    0
 
 #define REG_LED_COLOR   0

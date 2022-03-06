@@ -2,8 +2,7 @@
 #define __MODES_H
 
 /// Idle mode: do nothing
-#define IMODE_IDLE            0
-#define REG8_MODE             0
+
 #define IMODE_IDLE            0
 #define IMODE_GO_FORWARD      1
 #define IMODE_TURN_RIGHT      2
@@ -13,7 +12,7 @@
 #define REG_FREQ              2
 #define REG_PHI               3
 
-#define REG_LED         1
+#define REG_LED         4
 #define LED_MODE_OFF    0
 
 /// The main loop for mode switching
