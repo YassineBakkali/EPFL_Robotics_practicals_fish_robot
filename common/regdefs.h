@@ -12,6 +12,12 @@
 #define SPACE_KEYCODE       2097184
 #define A_KEYCODE           4259937
 #define F_KEYCODE           4587622
+#define FORWARD_KEYCODE     2490368
+#define LEFT_KEYCODE        2424832
+#define RIGHT_KEYCODE       2555904
+#define S_KEYCODE           5439603
+#define M_KEYCODE           5046381
+#define P_KEYCODE           5242992
 
 // For exercise 2 :
 

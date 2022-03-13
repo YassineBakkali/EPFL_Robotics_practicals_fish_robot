@@ -1,0 +1,293 @@
+make.exe all -f c:\Robotics_practicals\TP8\make --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: c:\Robotics_practicals\TP8\make: No such file or directory
+ 
+make: *** No rule to make target 'c:\Robotics_practicals\TP8\make'.  Stop.
+ 
+# GNU Make 4.3
+# Built for Windows32
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Sun Mar 13 09:51:33 2022
+
+# Variables
+
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
+SYSTEMDRIVE = C:
+# environment
+JAVA_HOME = C:\Program Files\Java\jdk1.8.0_211
+# environment
+LC_ALL = C
+# environment
+USERPROFILE = C:\Users\Yassine Bakkali
+# environment
+VBOX_MSI_INSTALL_PATH = C:\Program Files\Oracle\VirtualBox\
+# environment
+LOCALAPPDATA = C:\Users\Yassine Bakkali\AppData\Local
+# environment
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-6512cb4e-f421-44cf-a067-f079eb7d3158-sock
+# environment
+VSCODE_CWD = C:\Microsoft VS Code
+# environment
+CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
+# environment
+SYSTEMROOT = C:\WINDOWS
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+# environment
+GOOGLE_API_KEY = no
+# default
+MAKE_COMMAND := C:/ProgramData/chocolatey/lib/make/tools/install/bin/make.exe
+# automatic
+@D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_11972_TPSBMHKYXHXPLMFO
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# automatic
+%D = $(patsubst %/,%,$(patsubst %\,%,$(dir $%)))
+# automatic
+^D = $(patsubst %/,%,$(patsubst %\,%,$(dir $^)))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\Yassine Bakkali\AppData\Roaming\Code\CachedData\f80445acd5a3dadef24aa209168452a3d97cc326
+# environment
+LANG = C
+# default
+.LOADED := 
+# environment
+TMP = C:\Users\Yassine Bakkali\AppData\Local\Temp
+# default
+.INCLUDE_DIRS = .
+# environment
+CONFIGSETROOT = C:\WINDOWS\ConfigSetRoot
+# environment
+PROCESSOR_ARCHITEW6432 = AMD64
+# makefile
+MAKEFLAGS = prR
+# environment
+ONEDRIVE = C:\Users\Yassine Bakkali\OneDrive
+# makefile
+CURDIR := c:/Robotics_practicals/TP8
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# automatic
+*D = $(patsubst %/,%,$(patsubst %\,%,$(dir $*)))
+# environment
+PROGRAMFILES = C:\Program Files (x86)
+# environment
+MFLAGS = -prR
+# default
+.SHELLFLAGS := -c
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# automatic
++D = $(patsubst %/,%,$(patsubst %\,%,$(dir $+)))
+# makefile
+MAKEFILE_LIST := 
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+VSCODE_PID = 11972
+# automatic
+?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
+# environment
+GOOGLE_DEFAULT_CLIENT_ID = no
+# automatic
+*F = $(notdir $*)
+# automatic
+<D = $(patsubst %/,%,$(patsubst %\,%,$(dir $<)))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# default
+MAKE_HOST := Windows32
+# environment
+PROGRAMDATA = C:\ProgramData
+# default
+SHELL := sh.exe
+# environment
+CLASSPATH = .;
+# environment
+HOMEPATH = \Users\Yassine Bakkali
+# environment
+PLATFORMIO_CALLER = vscode
+# default
+MAKECMDGOALS := all
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+COMSPEC = C:\WINDOWS\system32\cmd.exe
+# environment
+WINDIR = C:\WINDOWS
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = C:\Python310\Scripts\;C:\Python310\;C:\Program Files (x86)\AdoptOpenJDK\jdk-8.0.292.10-hotspot\bin;C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System 
+32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\MATLAB\R2021a\bin;C:\Program Files\MATLAB\MATLAB Runtime\v92\runtime\win64;C:\Program Files\PuTTY\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Android\android-sdk\tools\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Program Files (x86)\Calibre2\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\Yassine Bakkali\AppData\Local\Microsoft\WindowsApps;C:\\MinGW\bin;C:\Eclipse_e-puck2_Win32_29_jan_2020\Eclipse_e-puck2\Tools\gcc-arm-none-eabi-7-2017-q4-major-win32\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Users\Yassine Bakkali\AppData\Local\Android\Sdk\platform-tools;C:\Program Files (x86)\AdoptOpenJDK\jdk-8.0.292.10-hotspot\bin;C:\Program Files (x86)\Java\jre1.8.0_281\bin;C:\Microsoft VS Code\bin;";C:\Program Files\Java\jdk1.8.0_211\bin";C:\Users\Yassine Bakkali\AppData\Local\Programs\MiKTeX\miktex\bin\x64\;C:\Users\Yassine Bakkali\AppData\Local\Pandoc\;C:\Anaconda\Scripts;
+# environment
+COMPUTERNAME = LAPTOP-949MTOKD
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# environment
+PROMPT = $P$G
+# environment
+CHOCOLATEYLASTPATHUPDATE = 132643431003390821
+# environment
+LOGONSERVER = \\LAPTOP-949MTOKD
+# environment
+QSYS_ROOTDIR = C:\intelFPGA_lite\18.1\quartus\sopc_builder\bin
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+USERNAME = YassineBakkali
+# environment
+COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
+# automatic
+?F = $(notdir $?)
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+NO_PROXY = 127.0.0.1
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+# automatic
++F = $(notdir $+)
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+USERDOMAIN = LAPTOP-949MTOKD
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+OS = Windows_NT
+# environment
+PLATFORMIO_PATH = C:\Users\Yassine Bakkali\.platformio\python3;C:\Python310\Scripts\;C:\Python310\;C:\Program Files (x86)\AdoptOpenJDK\jdk-8.0.292.10-hotspot\bin;C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\MATLAB\R2021a\bin;C:\Program Files\MATLAB\MATLAB Runtime\v92\runtime\win64;C:\Program Files\PuTTY\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Android\android-sdk\tools\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Program Files (x86)\Calibre2\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\Yassine Bakkali\AppData\Local\Microsoft\WindowsApps;C:\\MinGW\bin;C:\Eclipse_e-puck2_Win32_29_jan_2020\Eclipse_e-puck2\Tools\gcc-arm-none-eabi-7-2017-q4-major-win32\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Users\Yassine Bakkali\AppData\Local\Android\Sdk\platform-tools;C:\Program Files (x86)\AdoptOpenJDK\jdk-8.0.292.10-hotspot\bin;C:\Program Files (x86)\Java\jre1.8.0_281\bin;C:\Microsoft VS Code\bin;";C:\Program Files\Java\jdk1.8.0_211\bin";C:\Users\Yassine Bakkali\AppData\Local\Programs\MiKTeX\miktex\bin\x64\;C:\Users\Yassine Bakkali\AppData\Local\Pandoc\;C:\Anaconda\Scripts;;C:\Python310\Scripts\;C:\Python310\;C:\Program Files (x86)\AdoptOpenJDK\jdk-8.0.292.10-hotspot\bin;C:\Python39\Scripts\;C:\Python39\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\MATLAB\R2021a\bin;C:\Program Files\MATLAB\MATLAB Runtime\v92\runtime\win64;C:\Program Files\PuTTY\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Android\android-sdk\tools\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Program Files (x86)\Calibre2\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\Yassine Bakkali\AppData\Local\Microsoft\WindowsApps;C:\\MinGW\bin;C:\Eclipse_e-puck2_Win32_29_jan_2020\Eclipse_e-puck2\Tools\gcc-arm-none-eabi-7-2017-q4-major-win32\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Users\Yassine Bakkali\AppData\Local\Android\Sdk\platform-tools;C:\Program Files (x86)\AdoptOpenJDK\jdk-8.0.292.10-hotspot\bin;C:\Program Files (x86)\Java\jre1.8.0_281\bin;C:\Microsoft VS Code\bin;";C:\Program Files\Java\jdk1.8.0_211\bin";C:\Users\Yassine Bakkali\AppData\Local\Programs\MiKTeX\miktex\bin\x64\;C:\Users\Yassine Bakkali\AppData\Local\Pandoc\;C:\Anaconda\Scripts;
+# makefile
+.DEFAULT_GOAL := 
+# default
+MAKE_VERSION := 4.3
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# environment
+USERDOMAIN_ROAMINGPROFILE = LAPTOP-949MTOKD
+# environment
+NUMBER_OF_PROCESSORS = 8
+# environment
+PUBLIC = C:\Users\Public
+# environment
+QUARTUS_ROOTDIR = C:\intelFPGA_lite\18.1\quartus
+# environment
+SOPC_KIT_NIOS2 = C:\intelFPGA_lite\18.1\nios2eds
+# environment
+APPDATA = C:\Users\Yassine Bakkali\AppData\Roaming
+# environment
+HOMEDRIVE = C:
+# environment
+PROCESSOR_ARCHITECTURE = x86
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/services/extensions/node/extensionHostProcess
+# environment
+PLATFORMIO_IDE = 2.4.2
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+TEMP = C:\Users\Yassine Bakkali\AppData\Local\Temp
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\37e9e7196a9ad6b9a3fcf227d8250dd5-1.64.2-main-sock
+# environment
+GOOGLE_DEFAULT_CLIENT_SECRET = no
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+SESSIONNAME = Console
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync load
+# environment
+PROCESSOR_REVISION = 8e0a
+# environment
+CHOCOLATEYTOOLSLOCATION = C:\tools
+# environment
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
+# variable set hash-table stats:
+# Load=111/1024=11%, Rehash=0, Collisions=10/132=8%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+
+# No files, no impossibilities in 0 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+c:\Robotics_practicals\TP8\make:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=4/1024=0%, Rehash=0, Collisions=0/14=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 5 / storage = 57 B / avg = 11 B
+# current buf: size = 8174 B / used = 57 B / count = 5 / avg = 11 B
+
+# strcache performance: lookups = 7 / hit rate = 28%
+# hash-table stats:
+# Load=5/8192=0%, Rehash=0, Collisions=0/7=0%
+# Finished Make data base on Sun Mar 13 09:51:33 2022
+
+ 
