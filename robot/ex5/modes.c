@@ -9,8 +9,8 @@
 
 const uint8_t MOTOR_ADDR = 21;
 
-static uint8_t amplitude = 40;
-static uint8_t frequency = 1;
+static uint8_t amplitude = ENCODE_PARAM_8(20, AMPLITUDE_MIN, AMPLITUDE_MAX); // 20 deg
+static uint8_t frequency = ENCODE_PARAM_8(1, FREQ_MAX, FREQ_MIN); // 1 Hz
 
 static int8_t register_handler(uint8_t operation, uint8_t address, RadioData* radio_data)
 {
