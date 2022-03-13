@@ -121,7 +121,7 @@ static void move_mode(Mode mode) {
         // right fin as passive
         bus_set(MOTOR_ADDR[0] + 2, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
         bus_set(MOTOR_ADDR[0] + 2, MREG_MODE, MODE_IDLE);
-        // left fine
+        // left fin
         bus_set(MOTOR_ADDR[0] + 1, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded/SIDE_FIN_AMP_RATIO));
         // caudal fin
         bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded));
