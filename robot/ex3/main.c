@@ -31,7 +31,7 @@ static int8_t register_handler(uint8_t operation, uint8_t address, RadioData* ra
 int main(void)
 {
   hardware_init();
-  
+  radio_add_reg_callback(register_handler);
   // Changes the color of the led (red) to show the boot
   set_color_i(4, 0);
 
@@ -51,7 +51,6 @@ int main(void)
         pos[j][i] = bus_get(MOTOR_ADDR[i]+j, MREG_POSITION);
       }
     }
-    radio_add_reg_callback(register_handler);
   }
   return 0;
 }
