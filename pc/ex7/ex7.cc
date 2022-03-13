@@ -22,20 +22,20 @@ using namespace std;
 #define REG_PHI               3
 
 #undef FREQ_MAX
-#define FREQ_MAX 1.5f
+#define FREQ_MAX              1.5f
 
-#define PHI_MIN 0.5f
-#define PHI_MAX 1.5f
+#define PHI_MIN               0.f
+#define PHI_MAX               M_PI
 
-#define REG_LED         4
-#define LED_MODE_OFF    0
+#define REG_LED               4
+#define LED_MODE_OFF          0
 
-#define REG_LED_COLOR   0
+#define REG_LED_COLOR         0
 
-#define GREEN_VALUE     64 
-#define MAX_CHANNEL_VALUE (2^8-1)
+#define GREEN_VALUE           64 
+#define MAX_CHANNEL_VALUE     (2^8-1)
 
-#define DISTANCE_MAX        1 // in m
+#define DISTANCE_MAX          1 // in m
 
 const uint8_t RADIO_CHANNEL = 201;         ///< robot radio channel
 const char* INTERFACE = "COM1";            ///< robot radio interface
