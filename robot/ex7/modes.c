@@ -17,7 +17,6 @@
 #define PHI_MAX M_PI
 
 #define STEERING_ANGLE        20
-#define FIN_CORRECTION_RATIO  1.6f
 #define SIDE_FIN_AMP_RATIO    2
 
 const uint8_t MOTOR_ADDR[BODY_NUMBER] = {72, 21};
@@ -60,7 +59,7 @@ static void move_mode(Mode mode) {
   do {
     // Calculates the delta_t in seconds and adds it to the current time
     dt = getElapsedSysTICs(cycletimer);
-    cycletimer = getSysTICs();
+    cycletimer = getSysTcICs();
     delta_t = (float) dt / sysTICSperSEC;
     my_time += delta_t;
 
@@ -74,6 +73,7 @@ static void move_mode(Mode mode) {
     } else if (f_freq < FREQ_MIN){
       f_freq = FREQ_MIN;
     }
+
     if(f_amplitude > AMPLITUDE_MAX){
       f_amplitude = AMPLITUDE_MAX;
     } else if (f_amplitude < AMPLITUDE_MIN){
@@ -86,13 +86,13 @@ static void move_mode(Mode mode) {
       f_phi = PHI_MIN;
     }
 
-    // Calculates the sine wave
+    // Calculates the sine waves
     l = f_amplitude * sin(M_TWOPI * f_freq * my_time);
     l_rounded = (int8_t) l;
-    int8_t l_rounded_corr = (int8_t)((float)l_rounded * FIN_CORRECTION_RATIO);
-
+    
     l_offset = f_amplitude * sin(M_TWOPI * f_freq * my_time + f_phi);
     l_offset_rounded = (int8_t) l_offset;
+
     switch (mode) {
       case FORWARD:
         bus_set(MOTOR_ADDR[0] + 1, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded/SIDE_FIN_AMP_RATIO));
@@ -114,7 +114,7 @@ static void move_mode(Mode mode) {
       case RIGHT:
         bus_set(MOTOR_ADDR[0] + 2, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
         bus_set(MOTOR_ADDR[0] + 2, MREG_MODE, MODE_IDLE);
-        bus_set(MOTOR_ADDR[0] + 1, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded_corr/SIDE_FIN_AMP_RATIO));
+        bus_set(MOTOR_ADDR[0] + 1, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded/SIDE_FIN_AMP_RATIO));
         bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded));
         bus_set(MOTOR_ADDR[0], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(STEERING_ANGLE));
         break;
