@@ -17,10 +17,20 @@ const uint8_t RADIO_CHANNEL = 201;         ///< robot radio channel
 const char* INTERFACE = "COM1";            ///< robot radio interface
 
 void send_amplitude(CRemoteRegs &regs, float amplitude){
+  if (amplitude < AMPLITUDE_MIN){
+    amplitude = AMPLITUDE_MIN;
+  } else if (amplitude > AMPLITUDE_MAX){
+    amplitude = AMPLITUDE_MAX;
+  }
   regs.set_reg_b(REG_AMP, ENCODE_PARAM_8(amplitude,AMPLITUDE_MIN,AMPLITUDE_MAX));
 }
 
 void send_freq(CRemoteRegs &regs, float frequency){
+  if (frequency < FREQ_MIN){
+    frequency = FREQ_MIN;
+  } else if (frequency > FREQ_MAX){
+    frequency = FREQ_MAX;
+  }
   regs.set_reg_b(REG_FREQ, ENCODE_PARAM_8(frequency,FREQ_MIN,FREQ_MAX));
 }
 
