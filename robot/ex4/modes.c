@@ -5,7 +5,7 @@
 #include "registers.h"
 #include "hardware.h"
 
-const uint8_t MOTOR_ADDR = 21; 
+const uint8_t MOTOR_ADDR = 21; // caudal fin motor address
 static int8_t pos = 0;
 
 static int8_t register_handler(uint8_t operation, uint8_t address, RadioData* radio_data)
@@ -16,6 +16,7 @@ static int8_t register_handler(uint8_t operation, uint8_t address, RadioData* ra
           reg8_table[REG8_MODE] = radio_data->byte;
           return TRUE;
         case MREG_SETPOINT:
+          // read desired setpoint sent over radio
           pos = (int8_t)radio_data->byte;
           return TRUE;
       }

@@ -7,8 +7,6 @@
 
 using namespace std;
 
-const uint8_t MOTOR_ADDR[BODY_NUMBER] = {72, 21};
-
 const uint8_t RADIO_CHANNEL = 201;         ///< robot radio channel
 const char* INTERFACE = "COM1";            ///< robot radio interface
 

@@ -11,15 +11,18 @@
 #define BODY_NUMBER           2
 
 #undef  FREQ_MAX 
-#define FREQ_MAX              1.5f
+#define FREQ_MAX              1.5f  // Hz
 
-#define PHI_MIN               0.f
-#define PHI_MAX M_PI
+#define PHI_MIN               0.f   // rad
+#define PHI_MAX               M_PI  // rad
 
-#define STEERING_ANGLE        20
+#define STEERING_ANGLE        20    // deg
 #define SIDE_FIN_AMP_RATIO    2
 
+// list of body addresses
 const uint8_t MOTOR_ADDR[BODY_NUMBER] = {72, 21};
+
+// list of the number of limbs for its corresponding body
 const uint8_t LIMB_NUMBER[BODY_NUMBER] = {3, 1};
 
 // set default values
@@ -43,8 +46,7 @@ static void move_mode(Mode mode) {
   cycletimer = getSysTICs();
   my_time = 0;
 
-  // Initialises the body module with the specified address (but do not start
-  // the PD controller)
+  // Initialises the body modules with the specified addresses
   uint8_t i = 0;
   uint8_t j = 0;
   for(i = 0; i < BODY_NUMBER; ++i ){
@@ -95,27 +97,35 @@ static void move_mode(Mode mode) {
 
     switch (mode) {
       case FORWARD:
+        // left fin
         bus_set(MOTOR_ADDR[0] + 1, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded/SIDE_FIN_AMP_RATIO));
-        pause(ONE_MS);
+        // right fin
         bus_set(MOTOR_ADDR[0] + 2, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded/SIDE_FIN_AMP_RATIO));
-        pause(ONE_MS);
+        // caudal fin
         bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded));
-        pause(ONE_MS);
+        // body module
         bus_set(MOTOR_ADDR[0], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_offset_rounded));
-        pause(ONE_MS);
         break;
       case LEFT:
+        // left fin as passive
         bus_set(MOTOR_ADDR[0] + 1, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
         bus_set(MOTOR_ADDR[0] + 1, MREG_MODE, MODE_IDLE);
+        // right fin
         bus_set(MOTOR_ADDR[0] + 2, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded/SIDE_FIN_AMP_RATIO));
+        // caudal fin
         bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded));
+        // body module
         bus_set(MOTOR_ADDR[0], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(-STEERING_ANGLE));
         break;
       case RIGHT:
+        // right fin as passive
         bus_set(MOTOR_ADDR[0] + 2, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
         bus_set(MOTOR_ADDR[0] + 2, MREG_MODE, MODE_IDLE);
+        // left fine
         bus_set(MOTOR_ADDR[0] + 1, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded/SIDE_FIN_AMP_RATIO));
+        // caudal fin
         bus_set(MOTOR_ADDR[1], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(l_rounded));
+        // body module
         bus_set(MOTOR_ADDR[0], MREG_SETPOINT, DEG_TO_OUTPUT_BODY(STEERING_ANGLE));
         break;
     }

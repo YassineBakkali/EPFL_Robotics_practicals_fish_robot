@@ -7,28 +7,28 @@
 #include "regdefs.h"
 #include <stdint.h>
 
-const uint8_t MOTOR_ADDR = 21;
+const uint8_t MOTOR_ADDR = 21; // caudal fin motor address
 
 static uint8_t amplitude = ENCODE_PARAM_8(20, AMPLITUDE_MIN, AMPLITUDE_MAX); // 20 deg
 static uint8_t frequency = ENCODE_PARAM_8(1, FREQ_MAX, FREQ_MIN); // 1 Hz
 
 static int8_t register_handler(uint8_t operation, uint8_t address, RadioData* radio_data)
 {
-    if (operation == ROP_WRITE_8){
-      switch(address) {
-        case REG8_MODE: 
-          reg8_table[REG8_MODE] = radio_data->byte;
-          return TRUE;
-        case REG_AMP:
-          amplitude = radio_data->byte;
-          bus_set(MOTOR_ADDR, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
-          return TRUE;
-        case REG_FREQ:
-          frequency = radio_data->byte;
-          bus_set(MOTOR_ADDR, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
-          return TRUE;
-      }
+  if (operation == ROP_WRITE_8){
+    switch(address) {
+      case REG8_MODE: 
+        reg8_table[REG8_MODE] = radio_data->byte;
+        return TRUE;
+      case REG_AMP:
+        amplitude = radio_data->byte;
+        bus_set(MOTOR_ADDR, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
+        return TRUE;
+      case REG_FREQ:
+        frequency = radio_data->byte;
+        bus_set(MOTOR_ADDR, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
+        return TRUE;
     }
+  }
   return FALSE;
 }
 
@@ -52,6 +52,7 @@ void sine_demo_mode()
     delta_t = (float) dt / sysTICSperSEC;
     my_time += delta_t;
 
+    // decode uint8_t values sent over radio back to float values
     float f_amplitude = DECODE_PARAM_8(amplitude ,AMPLITUDE_MIN, AMPLITUDE_MAX);
     float f_freq = DECODE_PARAM_8(frequency ,FREQ_MIN, FREQ_MAX);
     
@@ -79,6 +80,7 @@ void sine_demo_mode()
 
   } while (reg8_table[REG8_MODE] == IMODE_SINE_DEMO);
 
+  // set back the motor to its neutral position
   bus_set(MOTOR_ADDR, MREG_SETPOINT, DEG_TO_OUTPUT_BODY(0.0));
   pause(ONE_SEC);
   bus_set(MOTOR_ADDR, MREG_MODE, MODE_IDLE);

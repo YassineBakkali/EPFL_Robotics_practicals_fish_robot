@@ -9,6 +9,7 @@
 #define DECODE_PARAM_8(b,pmin,pmax) (pmin + (pmax-pmin) * (float) b / 255.0)
 
 // Several keycodes for ext_key() function
+// These were the values that were returned by the ext_key() function.
 #define SPACE_KEYCODE       2097184
 #define A_KEYCODE           4259937
 #define F_KEYCODE           4587622

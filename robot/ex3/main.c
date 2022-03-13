@@ -4,16 +4,19 @@
 #include "registers.h"
 #include "regdefs.h"
 
-
+// list of the number of limbs for its corresponding body
 const uint8_t LIMB_NUMBER[BODY_NUMBER] = {3, 1};
+// list of body address
 const uint8_t MOTOR_ADDR[BODY_NUMBER] = {72, 21};
 
+// table of position of the limbs corresponding to a body
 static int8_t pos[LIMB_NUMBER_MAX][BODY_NUMBER] = {0}; 
 
 static int8_t register_handler(uint8_t operation, uint8_t address, RadioData* radio_data)
 {
   uint8_t i, j, size_sum = 0;
     if (operation == ROP_READ_MB){
+      // send position values over radio
       if (address < BODY_NUMBER) {
         for (j = 0 ; j < BODY_NUMBER ; ++j){
           for (i = 0; i < LIMB_NUMBER[j]; i++) {
@@ -44,7 +47,7 @@ int main(void)
     }
   }
 
-  // And then... do this
+  // get position values of each motor
   while (1) {
     for(uint8_t i = 0; i < BODY_NUMBER; ++i ){
       for(uint8_t j = 0; j < LIMB_NUMBER[i]; ++j ){

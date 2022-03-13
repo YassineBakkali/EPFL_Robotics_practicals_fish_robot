@@ -32,9 +32,6 @@ using namespace std;
 
 #define REG_LED_COLOR         0
 
-#define GREEN_VALUE           64 
-#define MAX_CHANNEL_VALUE     (2^8-1)
-
 #define DISTANCE_MAX          1 // in m
 
 const uint8_t RADIO_CHANNEL = 201;         ///< robot radio channel
@@ -96,7 +93,7 @@ void stop_robot(CRemoteRegs &regs){
 
 void measure_robot_speed(CRemoteRegs &regs, CTrackingClient &trk) { // pass trk by ref?
 
-  cout << "Start robot speed measurement..." << endl;
+  cout << "Starting robot speed measurement..." << endl;
   static int iter = 1;
   stop_robot(regs);
   uint32_t frame_time;
@@ -111,10 +108,13 @@ void measure_robot_speed(CRemoteRegs &regs, CTrackingClient &trk) { // pass trk 
   // Reads its coordinates (if (id == -1), then no spot is detected)
   if (id != -1 && trk.get_pos(id, x0, y0)) {
     ofstream log;
+    // add frequency information in filename and iteration number (to avoid overwriting)
     ostringstream filename;
-    filename << iter << "_fish_position_freq_" << frequency << ".txt";
+    filename << frequency << "_fish_position_freq_" << iter << ".txt";
     log.open (filename.str());
+    // log first position
     log << x0 << "," << y0 << endl;
+    // set first timestamp
     double t0 = time_d();
     go_forward(regs);
     while (1) {
@@ -128,6 +128,8 @@ void measure_robot_speed(CRemoteRegs &regs, CTrackingClient &trk) { // pass trk 
         log << x << "," << y << endl;
         cout << "x = " << x << ", y = " << y << '\r' << flush;
         distance = sqrt((x - x0)*(x - x0) + (y - y0)*(y - y0));
+        // Stop measurement when the robot has reached DISTANCE_MAX
+        // or when manually stopped by pressing any key
         if(distance >= DISTANCE_MAX || kbhit()) {
           double speed = distance/(time_d()-t0);
           cout << "Measured speed: " << speed << " m/s" << endl;
