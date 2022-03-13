@@ -5,7 +5,7 @@
 #include "regdefs.h"
 
 
-const uint8_t LIMB_NUMBER[BODY_NUMBER] = {2, 0};
+const uint8_t LIMB_NUMBER[BODY_NUMBER] = {3, 1};
 const uint8_t MOTOR_ADDR[BODY_NUMBER] = {72, 21};
 
 static int8_t pos[LIMB_NUMBER_MAX][BODY_NUMBER] = {0}; 
@@ -16,7 +16,7 @@ static int8_t register_handler(uint8_t operation, uint8_t address, RadioData* ra
     if (operation == ROP_READ_MB){
       if (address < BODY_NUMBER) {
         for (j = 0 ; j < BODY_NUMBER ; ++j){
-          for (i = 0; i <= LIMB_NUMBER[j]; i++) {
+          for (i = 0; i < LIMB_NUMBER[j]; i++) {
             radio_data->multibyte.data[size_sum] = pos[i][j];
             ++size_sum; 
           } 
@@ -39,7 +39,7 @@ int main(void)
   // the PD controller)
   for(uint8_t i = 0; i < BODY_NUMBER; ++i ){
     init_body_module(MOTOR_ADDR[i]);
-    for(uint8_t j = 0; j <= LIMB_NUMBER[i]; ++j){
+    for(uint8_t j = 0; j < LIMB_NUMBER[i]; ++j){
       init_limb_module(MOTOR_ADDR[i] + j);
     }
   }
@@ -47,7 +47,7 @@ int main(void)
   // And then... do this
   while (1) {
     for(uint8_t i = 0; i < BODY_NUMBER; ++i ){
-      for(uint8_t j = 0; j <= LIMB_NUMBER[i]; ++j ){
+      for(uint8_t j = 0; j < LIMB_NUMBER[i]; ++j ){
         pos[j][i] = bus_get(MOTOR_ADDR[i]+j, MREG_POSITION);
       }
     }

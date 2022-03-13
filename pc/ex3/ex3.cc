@@ -7,7 +7,6 @@
 
 using namespace std;
 
-const uint8_t LIMB_NUMBER[BODY_NUMBER] = {2, 0};
 const uint8_t MOTOR_ADDR[BODY_NUMBER] = {72, 21};
 
 const uint8_t RADIO_CHANNEL = 201;         ///< robot radio channel
