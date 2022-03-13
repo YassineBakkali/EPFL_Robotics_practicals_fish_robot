@@ -50,8 +50,8 @@ int main()
     return 1;
   }
 
-  float amplitude = 60;
-  float frequency = 1;
+  float amplitude = 0;
+  float frequency = 0;
   DWORD key = 0;
 
   // Reboots the head microcontroller to make sure it is always in the same state
